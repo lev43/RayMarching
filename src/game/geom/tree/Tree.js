@@ -42,8 +42,7 @@ class Tree {
   get Json() {
     let tree = {
       points: this.allPoints,
-      size: this.size,
-      box: this.box
+      maxDepth: this.maxDepth,
     }
     tree.points.forEach((e, i) => {
       tree.points[i] = {
