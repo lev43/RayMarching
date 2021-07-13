@@ -41,11 +41,9 @@ class Box {
 }
 
 class Point {
-  parent = null
   nodes = []
   data = {}
   depth = NaN
-  box = new Box()
   constructor(pos) {
     this.position = pos
   }
