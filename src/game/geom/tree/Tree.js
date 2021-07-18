@@ -1,4 +1,4 @@
-const { Point } = require("../Shapes")
+const { Point, Box, Circle } = require("../Shapes")
 const { Vector3 } = require("../Vector")
 
 class Tree {
@@ -12,6 +12,13 @@ class Tree {
     for(let i in point.nodes)
       if(point.nodes[i] != null) 
         points.push(...this.findBox(box, point.nodes[i]))
+    return points
+  }
+  findCircle(circle = new Circle(), point = this.root) {
+    let points = circle.checkPointIn(point.position) ? [point] : []
+    for(let i in point.nodes)
+      if(point.nodes[i] != null) 
+        points.push(...this.findCircle(circle, point.nodes[i]))
     return points
   }
   #getTree(point = this.root) {
@@ -36,7 +43,7 @@ class Tree {
   get tree() {
     return this.#getTree()
   }
-  get allPoints() {
+  get points() {
     return this.#getAllPoints()
   }
   get Json() {

@@ -10,10 +10,10 @@ class Box {
     this.y2 = pos2.y ?? NaN
     this.z2 = pos2.z ?? NaN
   }
-  checkPointIn(pos) {
-    let {x, y, z} = pos
+  checkPointIn(position) {
+    let {x, y, z} = position
     let {x1, x2, y1, y2, z1, z2} = this
-    // console.log(pos)
+    // console.log(position)
     // console.log(this)
     return (
       (isNaN(x1) || (x ?? 0) >= x1 && (x ?? 0) <= x2)
@@ -37,6 +37,33 @@ class Box {
   static create(obj) {
     let {x1, y1, z1, x2, y2, z2} = obj
     return new Box(new Vector3(x1, y1, z1), new Vector3(x2, y2, z2))
+  }
+}
+
+class Circle {
+  position = new Vector3()
+  R = NaN // Radius
+  constructor(position = new Vector3(), Radius = NaN) {
+    this.position = position
+    this.R = Radius
+  }
+  checkPointIn(position) {
+    let {x, y, z} = position, {x: cx, y: cy, z: cz} = this.position, r = this.R
+    var dx = Math.abs(x-cx)
+    if(dx > r)return false
+    if(isNaN(dx))dx = 0
+    var dy = Math.abs(y-cy)
+    if(dy > r)return false
+    if(isNaN(dy))dy = 0
+    var dz = Math.abs(z-cz)
+    if(dz > r)return false
+    if(isNaN(dz))dz = 0
+    
+    if(dx + dy + dz <= r)return true
+    return (dx*dx + dy*dy + dz*dz <= r*r)
+  }
+  create(obj) {
+    return new Circle(Vector3.create(obj.position), obj.D)
   }
 }
 
@@ -73,5 +100,6 @@ class Point {
 
 module.exports = {
   Point,
-  Box
+  Box,
+  Circle
 }

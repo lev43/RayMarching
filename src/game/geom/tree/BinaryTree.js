@@ -4,7 +4,6 @@ const Tree = require("./Tree");
 
 class BinaryTree extends Tree {
   root = new Point(new Vector1(0)).setDepth(0)
-  constructor(){super(...arguments)}
   add(point) {
     let parent = this.root
     let {x} = point.position
