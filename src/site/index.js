@@ -20,13 +20,15 @@ ctx.fillRect(0, 0, sizeX, sizeY)
 
 var objs = [
   // new Object(new Vector2(0, 0), new CIRCLE(1), {r: 255, g: 0, b: 0, a: 255}),
-  new Object(new Vector2(100, 100), new CIRCLE(10), {r: 255, g: 0, b: 0, a: 255}),
+  new Object(new Vector2(100, 100), new QUAD(10, 45), {r: 255, g: 0, b: 0, a: 255}),
   new Object(new Vector2(100, 50), new CIRCLE(10), {r: 255, g: 255, b: 0, a: 255}),
   new Object(new Vector2(50, 50), new CIRCLE(10), {r: 255, g: 0, b: 255, a: 255}),
   new Object(new Vector2(150, 150), new CIRCLE(10), {r: 0, g: 0, b: 255, a: 255}),
-  new Object(new Vector2(50, 100), new CIRCLE(10), {r: 0, g: 255, b: 0, a: 255})
+  new Object(new Vector2(1500, 0), new CIRCLE(1000), {r: 0, g: 0, b: 0, a: 255}),
+  new Object(new Vector2(50, 100), new QUAD(10), {r: 0, g: 255, b: 0, a: 255})
 ]
 // console.log(...getLens(objs, {x:0,y:0}))
+console.log("angle:", getAngleFrom2Point({x: 1, y: 1}, {x:1, y: 2}))
 
 console.log('variables')
 window.request = new XMLHttpRequest();
@@ -43,6 +45,7 @@ class EventEmitter {
 window.events = new EventEmitter()
 
 let cam = new Camera()
+let speed = 5
 
 events.on('update', () => {
   // clearInterval(update)
@@ -51,10 +54,10 @@ events.on('update', () => {
   ctx.arc(cam.position.x, cam.position.y, 3, 0, 360)
   ctx.fill()
 
-  if(wsad[0] && cam.position.y - 1 >= 0)cam.position.y -= 1
-  if(wsad[1] && cam.position.y + 1 < canvas.height)cam.position.y += 1
-  if(wsad[2] && cam.position.x - 1 >= 0)cam.position.x -= 1
-  if(wsad[3] && cam.position.x + 1 < canvas.width)cam.position.x += 1
+  if(wsad[0] && cam.position.y - speed >= 0)cam.position.y -= speed
+  if(wsad[1] && cam.position.y + speed < canvas.height)cam.position.y += speed
+  if(wsad[2] && cam.position.x - speed >= 0)cam.position.x -= speed
+  if(wsad[3] && cam.position.x + speed < canvas.width)cam.position.x += speed
 })
 
 function getMousePos(canvas, event) {
@@ -102,4 +105,4 @@ ctx.clearRect(0, 0, sizeX, sizeY)
 
 
 console.log('Start')
-update = setInterval(() => events.emit('update'), 10)
+update = setInterval(() => events.emit('update'), 50)

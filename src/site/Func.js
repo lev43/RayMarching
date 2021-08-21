@@ -14,3 +14,26 @@ function getIndexFromPos(pos, width) {
   let {x,y} = pos
   return ((y * (width * 4)) + (x * 4))
 }
+
+function vecMax(a, b) {
+  return {x: Math.max(a.x, b.x), y: Math.max(a.y, b.y)}
+}
+function vecMin(a, b) {
+  return {x: Math.min(a.x, b.x), y: Math.min(a.y, b.y)}
+}
+function fvecMax(a, b) {
+  return {x: Math.max(a.x, b), y: Math.max(a.y, b)}
+}
+function fvecMin(a, b) {
+  return {x: Math.min(a.x, b), y: Math.min(a.y, b)}
+}
+
+function vecAbs(a) {
+  return {x: Math.abs(a.x), y: Math.abs(a.y)}
+}
+
+function getAngleFrom2Point(a, b) {
+  let c = Vector2.minus(b, a)
+
+  return Math.atan2(c.y, c.x) * (180 / Math.PI)
+}

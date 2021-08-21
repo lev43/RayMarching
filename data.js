@@ -4,7 +4,7 @@ const src = root + '/src'
 const site = `${src}/site`
 
 // Constants
-const host = 'localhost'
+const host = '127.0.0.1'
 const port = '8080'
 const worldSize = 10
 
