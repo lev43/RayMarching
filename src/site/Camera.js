@@ -32,7 +32,7 @@ class Ray {
 }
 
 class Camera {
-  static step = 0.1
+  static step = 0.555
   constructor(position = new Vector2(0, 0)) {
     this.position = position
   }

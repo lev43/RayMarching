@@ -21,16 +21,16 @@ class CIRCLE extends Collider {
 
 class QUAD extends Collider {
   size = NaN
-  constructor(s = 0, angle = 0) {
+  constructor(s = {x, y}, angle = 0) {
     super()
     this.size = s
     this.angle = angle
   }
   len(centree = new Vector2, p = new Vector2) {
     p = Vector2.minus(p, centree)
-    let d = new Vector2(Math.abs(p.x) - this.size, Math.abs(p.y) - this.size)
+    let d = new Vector2(Math.abs(p.x) - this.size.x, Math.abs(p.y) - this.size.y)
     let l = Math.sqrt(Math.max(d.x, 0) * Math.max(d.x, 0) + Math.max(d.y, 0) * Math.max(d.y, 0));
-    return l + Math.min(Math.max(d.x, d.y), 0);
+    return l + Math.min(Math.max(d.x, d.y), 0)
   }
 }
 
